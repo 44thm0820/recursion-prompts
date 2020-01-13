@@ -417,20 +417,20 @@ var countValuesInObj = function(obj, value) {
 // 24. Find all keys in an object (and nested objects) by a provided name and rename
 // them to a provided new name while preserving the value stored at that key.
 var replaceKeysInObj = function(obj, oldKey, newKey) {
-  // let objNew = {};
-  // for (let i = 0; i < Object.keys(obj).length; i++) {
 
-    // if (Object.keys(obj)[i] === oldKey && typeof obj[Object.keys(obj)[i]] !== 'object') {
-    //   objNew[newKey] = obj[oldKey];
-    // } else if (Object.keys(obj)[i] === oldKey && typeof obj[Object.keys(obj)[i]] === 'object') {
-    //   objNew[newKey] = replaceKeysInObj(obj[oldKey], oldKey, newKey);
-    // } else if (Object.keys(obj)[i] !== oldKey && typeof obj[Object.keys(obj)[i]] === 'object') {
-    //   objNew[newKey] = replaceKeysInObj(obj[oldKey], oldKey, newKey);
-    // } else if (Object.keys(obj)[i] !== oldKey && typeof obj[Object.keys(obj)[i]] !== 'object') {
-    //   objNew[Object.keys(obj)[i]] = obj[Object.keys(obj)[i]];
-    // }
-  // }
-  // return objNew;
+    if (oldKey in obj) {
+      obj[newKey] = obj[oldKey];
+      delete obj[oldKey];
+    }
+    for(let i = 0; i < Object.keys(obj).length; i++) {
+      if (typeof obj[ Object.keys(obj)[i] ] === 'object') {
+        obj[ Object.keys(obj)[i] ] = replaceKeysInObj (obj[ Object.keys(obj)[i] ], oldKey, newKey);
+      }
+    }
+    return obj;
+
+
+
 };
 
 // 25. Get the first n Fibonacci numbers. In the Fibonacci sequence, each subsequent
