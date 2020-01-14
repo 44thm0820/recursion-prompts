@@ -618,17 +618,18 @@ var alternateSign = function(array) {
 // Assume all numbers are single digits (less than 10).
 // numToText("I have 5 dogs and 6 ponies"); // "I have five dogs and six ponies"
 var numToText = function(str) {
-  let arr = str.split(' ');
+  let words = str.split(' ');
   const dict = ['zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine'];
   const digits = ['0','1','2','3','4','5', '6', '7', '8', '9'];
 
-  if (arr.length === 1) {
-    if (digits.includes(arr[0])) {
-      arr[0] = dict[Number(arr[0])];
+  if (words.length === 1) {
+    if (digits.includes(words[0])) {
+      words[0] = dict[Number(words[0])];
     }
-    return arr.join(' ');
+    return words.join(' ');
   } else {
-    return numToText(str.split(' ').slice(0,1).join(' ')) + ' ' + numToText(str.split(' ').slice(1).join(' '));
+    // return numToText(str.split(' ').slice(0,1).join(' ')) + ' ' + numToText(str.split(' ').slice(1).join(' '));
+    return numToText(words.slice(0,1).join(' ')) + ' ' + numToText(words.slice(1).join(' '));
   }
 };
 
