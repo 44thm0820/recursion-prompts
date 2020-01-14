@@ -503,11 +503,29 @@ var capitalizeFirst = function(array) {
 // };
 // nestedEvenSum(obj1); // 10
 var nestedEvenSum = function(obj) {
+  let sum = 0;
+  for (key in obj) {
+    if (typeof obj[key] === 'number' && obj[key] % 2 === 0) {
+      sum += obj[key];
+    } else if (typeof obj[key] === 'object') {
+      sum += nestedEvenSum(obj[key]);
+    }
+  }
+  return sum;
 };
 
 // 30. Flatten an array containing nested arrays.
 // flatten([1,[2],[3,[[4]]],5]); // [1,2,3,4,5]
 var flatten = function(array) {
+  let arrFlat = [];
+  for (let i = 0; i < array.length; i++) {
+    if (!Array.isArray(array[i])) {
+      arrFlat.push(array[i]);
+    } else {
+      arrFlat = arrFlat.concat(flatten(array[i]));
+    }
+  }
+  return arrFlat;
 };
 
 // 31. Given a string, return an object containing tallies of each letter.
