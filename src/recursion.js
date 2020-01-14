@@ -568,12 +568,31 @@ var compress = function(list) {
 // itself.
 // augmentElements([[],[3],[7]], 5); // [[5],[3,5],[7,5]]
 var augmentElements = function(array, aug) {
+  if (array.length === 1) {
+    array[0].push(aug);
+    return array;
+  } else if (array.length >= 2) {
+    return augmentElements(array.slice(0,1),aug).concat(augmentElements(array.slice(1), aug));
+  }
 };
 
 // 34. Reduce a series of zeroes to a single 0.
 // minimizeZeroes([2,0,0,0,1,4]) // [2,0,1,4]
 // minimizeZeroes([2,0,0,0,1,0,0,4]) // [2,0,1,0,4]
 var minimizeZeroes = function(array) {
+  if (array.length === 1) {
+    return array;
+    //base case
+  } else if (array[array.length - 1] === 0 && array[array.length - 2] === 0) {
+    return minimizeZeroes(array.slice(0,-1));
+    // if repeat zero found at last two elements,
+    // return minimizeZeroes array with last element sliced
+  } else {
+    return minimizeZeroes(array.slice(0,-1)).concat(array.slice(-1));
+    // if no repeat zero found at last two elements,
+    // return minimizeZeroes array with last element sliced, but keep and concatenate that last element
+  }
+
 };
 
 // 35. Alternate the numbers in an array between positive and negative regardless of
