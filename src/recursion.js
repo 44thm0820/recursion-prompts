@@ -145,7 +145,7 @@ var palindrome = function(string) {
 var modulo = function(x, y) {
   if (y === 0) {
     return NaN;
-  } else if (x, y < 0) {
+  } else if (x < 0 && y < 0) {
     return -modulo(-x, -y);
   } else if (x < 0 && y > 0) {
     return -modulo(-x, y);
